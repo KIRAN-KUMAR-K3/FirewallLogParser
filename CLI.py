@@ -4,16 +4,17 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 
-# Input file containing IP addresses (not dates)
-INPUT_FILE = "/home/yashwanth/Imp/ip.txt"
+# Updated input file path
+INPUT_FILE = "/home/kali/Documents/ip.txt"
 
-# Output file for storing results
-OUTPUT_FILE = "/home/yashwanth/Imp/honey_res_24_31_25.csv"
+# Updated output file path
+OUTPUT_FILE = "/home/kali/Documents/honey_res_24_31_25.csv"
 
 # Function to process logs for a specific IP and day
 def process_ip_for_day(ip, day):
     try:
-        gz_file = f"/mnt/smb_share/Firewall-Logs/Firewall/Firewall_Rules.{day}.03.25.gz"
+        # Updated .gz log file path
+        gz_file = f"/mnt/Firewall-Logs/Firewall-Logs/Firewall/Firewall_Rules.{day}.03.25.gz"
         
         # Check if the .gz file exists
         if not os.path.isfile(gz_file):
@@ -50,11 +51,11 @@ def process_logs():
     start_time = time.time()
 
     # Use ThreadPoolExecutor to process logs concurrently for multiple IPs
-    with ThreadPoolExecutor(max_workers=7) as executor:  # Start with 4 threads
+    with ThreadPoolExecutor(max_workers=7) as executor:
         futures = []
 
-        # For each day (01 to 27)
-        for day in range(24, 31):  # Days 01 to 27
+        # For each day (24 to 30)
+        for day in range(24, 31):
             day_str = f"{day:02}"
             
             # For each IP, we submit the task to the thread pool
